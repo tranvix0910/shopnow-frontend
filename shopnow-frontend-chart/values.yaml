@@ -9,8 +9,8 @@ global:
 
 # Deployment
 image:
-  repository: "nginx"
-  tag: "latest"
+  repository: "022499043310.dkr.ecr.ap-southeast-1.amazonaws.com/shopnow/shopnow-frontend"
+  tag: "v1"
   pullPolicy: IfNotPresent
 
 replicaCount: 1
@@ -27,12 +27,10 @@ service:
 # Ingress
 ingress:
   className: "alb"
-  host: "localhost"
+  host: "shopnow.tranvix.click"
   path: "/"
   pathType: Prefix
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+  secretName: "shopnow-frontend-values"
 
 # ConfigMap
 configmap:
