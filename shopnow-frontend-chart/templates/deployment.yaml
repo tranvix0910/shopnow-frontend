@@ -17,6 +17,8 @@ spec:
         - name: {{ .Values.global.appName }}
           {{- if .Values.image.repository }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          {{- else }}
+          image: nginx:latest
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
