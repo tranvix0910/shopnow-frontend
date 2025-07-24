@@ -2,6 +2,7 @@
 global:
   appName: "shopnow-frontend"
   namespace: "shopnow"
+  environment: "production"  # dev, staging, production
   enabledComponents:
     configmap: false
     service: true
@@ -10,7 +11,7 @@ global:
 # Deployment
 image:
   secretName: "shopnow-frontend-values"
-  repository: "" 
+  repository: ""
   tag: "v1"
   pullPolicy: IfNotPresent
 
@@ -32,11 +33,11 @@ ingress:
   host: "shopnow.tranvix.click"
   path: "/"
   pathType: Prefix
-  certificateArn: ""
-  subnets: ""
-  listenPorts: ""
-  groupName: ""
-  actionsSslRedirect: ""
+  certificateArn: ""  # Will be overridden by external secret
+  subnets: ""         # Will be overridden by external secret
+  listenPorts: ""     # Will be overridden by external secret
+  groupName: ""       # Will be overridden by external secret
+  actionsSslRedirect: ""  # Will be overridden by external secret
 
 # ConfigMap
 configmap:
