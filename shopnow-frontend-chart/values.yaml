@@ -9,6 +9,7 @@ global:
 
 # Deployment
 image:
+  secretName: "shopnow-frontend-values"
   repository: "" 
   tag: "v1"
   pullPolicy: IfNotPresent
@@ -26,11 +27,11 @@ service:
 
 # Ingress
 ingress:
+  secretName: "shopnow-frontend-values"
   className: "alb"
   host: "shopnow.tranvix.click"
   path: "/"
   pathType: Prefix
-  secretName: "shopnow-frontend-values"
   certificateArn: ""
   subnets: ""
   listenPorts: ""
