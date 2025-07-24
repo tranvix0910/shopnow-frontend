@@ -31,6 +31,12 @@ ingress:
   path: "/"
   pathType: Prefix
   secretName: "shopnow-frontend-values"
+  # These values will be overridden by external secret
+  certificateArn: ""
+  subnets: ""
+  listenPorts: ""
+  groupName: ""
+  actionsSslRedirect: ""
 
 # ConfigMap
 configmap:

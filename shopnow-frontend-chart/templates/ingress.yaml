@@ -7,11 +7,11 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: {{ (index (secret "shopnow-frontend-values").data "certificateArn") | b64dec }}
-    alb.ingress.kubernetes.io/subnets: {{ (index (secret "shopnow-frontend-values").data "subnets") | b64dec }}
-    alb.ingress.kubernetes.io/listen-ports: {{ (index (secret "shopnow-frontend-values").data "listenPorts") | b64dec }}
-    alb.ingress.kubernetes.io/group.name: {{ (index (secret "shopnow-frontend-values").data "groupName") | b64dec }}
-    alb.ingress.kubernetes.io/actions.ssl-redirect: {{ (index (secret "shopnow-frontend-values").data "actionsSslRedirect") | b64dec }}
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.ingress.certificateArn }}
+    alb.ingress.kubernetes.io/subnets: {{ .Values.ingress.subnets }}
+    alb.ingress.kubernetes.io/listen-ports: {{ .Values.ingress.listenPorts }}
+    alb.ingress.kubernetes.io/group.name: {{ .Values.ingress.groupName }}
+    alb.ingress.kubernetes.io/actions.ssl-redirect: {{ .Values.ingress.actionsSslRedirect }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
