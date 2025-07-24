@@ -10,7 +10,7 @@ global:
 # Deployment
 image:
   secretName: "shopnow-frontend-values"
-  repository: "nginx" 
+  repository: "" 
   tag: "v1"
   pullPolicy: IfNotPresent
 
