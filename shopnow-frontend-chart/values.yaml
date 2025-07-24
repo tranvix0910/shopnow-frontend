@@ -1,0 +1,52 @@
+# Global settings
+global:
+  appName: "shopnow-frontend"
+  namespace: "shopnow"
+  enabledComponents:
+    configmap: false
+    service: true
+    ingress: true
+
+# Deployment
+image:
+  repository: "harbor.tranvix.click/shopnow/shopnow-frontend"
+  tag: "v2"
+  pullPolicy: IfNotPresent
+  pullSecret: "shopnow-registry-secret"
+
+replicaCount: 1
+rollingUpdate:
+  maxSurge: 25%
+  maxUnavailable: 25%
+
+# Service
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+# Ingress
+ingress:
+  className: "nginx"
+  host: "shopnow.tranvix.click"
+  path: "/"
+  pathType: Prefix
+
+# ConfigMap
+configmap:
+  data: {}
+  # Example:
+  # data:
+  #   application.properties: |
+  #     server.port=8080
+  #     spring.datasource.url=jdbc:mysql://db-service:3306/mydb
+
+serviceAccount:
+  create: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
