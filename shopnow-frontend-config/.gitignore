@@ -1,0 +1,11 @@
+# Ignore production overlays with sensitive data
+overlays/production/
+
+# Ignore any files with sensitive data
+*-secret.*
+*-prod.*
+*.pem
+*.key
+
+# Backup files
+backup-* 
