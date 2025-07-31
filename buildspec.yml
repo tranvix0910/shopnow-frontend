@@ -36,7 +36,7 @@ phases:
 
       # Run SonarQube analysis
       - echo "Running SonarQube analysis..."
-      - source build.env && sonar-scanner \
+      - . build.env && sonar-scanner \
           -Dsonar.projectKey=shopnow-frontend \
           -Dsonar.projectName=shopnow-frontend \
           -Dsonar.projectVersion=$TAG_NAME \
