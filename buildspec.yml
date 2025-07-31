@@ -26,9 +26,11 @@ phases:
 
       # Get Git Tag or fallback to commit hash
       - |
-        TAG_VERSION=$(git describe --tags --exact-match 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD)
-        echo "Using Git tag as version: $TAG_VERSION"
-        export TAG_NAME=$TAG_VERSION
+        GIT_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+        GIT_HASH=$(git rev-parse --short HEAD)
+        TAG_NAME="${GIT_TAG}_${GIT_HASH}"
+        export TAG_NAME
+        echo "Using image tag: $TAG_NAME"
 
       # Verify project structure
       - test -f "package.json" || { echo "Missing package.json"; exit 1; }
