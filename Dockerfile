@@ -1,5 +1,5 @@
 # Step 1: Build React app
-FROM node:18 AS builder
+FROM public.ecr.aws/docker/library/node:18 AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 
 # Step 2: Serve with NGINX
-FROM nginx:stable-alpine
+FROM public.ecr.aws/nginx/nginx:stable-alpine
 
 COPY --from=builder /app/build /usr/share/nginx/html
 

@@ -62,8 +62,8 @@ phases:
       - git clone $CONFIG_REPO_URL . && git config user.email "tranvix.work@gmail.com"
       - git config user.name "Tran Dai Vi - N22DCCI044"
       - >
-        sed -i "s/^  tag.*/  tag: \"$TAG_NAME\"/" helm-values/values-prod.yaml
-      - git add helm-values/values-prod.yaml
+        sed -i "s/^  tag.*/  tag: \"$TAG_NAME\"/" shopnow-frontend-chart/values.yaml
+      - git add shopnow-frontend-chart/values.yaml
       - git commit -m "Update frontend image version to $TAG_NAME"
       - git remote set-url origin https://$GITHUB_TOKEN@github.com/tranvix0910/shopnow-frontend-config.git
       - git push origin main
