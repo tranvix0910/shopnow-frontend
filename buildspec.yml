@@ -28,7 +28,7 @@ phases:
       - |
         TAG_VERSION=$(git describe --tags --exact-match 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || git rev-parse --short HEAD)
         echo "Using Git tag as version: $TAG_VERSION"
-        echo "TAG_NAME=$TAG_VERSION" >> build.env
+        export TAG_NAME=$TAG_VERSION
 
       # Verify project structure
       - test -f "package.json" || { echo "Missing package.json"; exit 1; }
@@ -36,7 +36,7 @@ phases:
 
       # Run SonarQube analysis
       - echo "Running SonarQube analysis..."
-      - . build.env && sonar-scanner \
+      - sonar-scanner \
           -Dsonar.projectKey=shopnow-frontend \
           -Dsonar.projectName=shopnow-frontend \
           -Dsonar.projectVersion=$TAG_NAME \
@@ -48,10 +48,10 @@ phases:
       - echo "Logging in to Amazon ECR..."
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_LOGIN_URI
 
+
   build:
     commands:
       - echo "Build phase started..."
-      - source build.env
       - docker build -t $ECR_REPOSITORY_URI:$TAG_NAME .
       - docker run --rm -d --name test-frontend -p 80:80 $ECR_REPOSITORY_URI:$TAG_NAME
       - sleep 5 && curl -f http://localhost:80 || echo "Test request failed"
@@ -61,7 +61,6 @@ phases:
   post_build:
     commands:
       - echo "Post-build phase started..."
-      - source build.env
       - docker push $ECR_REPOSITORY_URI:$TAG_NAME
 
       # Update config repo
@@ -77,7 +76,3 @@ phases:
       - cd ..
 
       - echo "✅ Build & Deploy completed for tag $TAG_NAME"
-
-artifacts:
-  files:
-    - build.env
