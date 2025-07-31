@@ -36,13 +36,7 @@ phases:
 
       # Run SonarQube analysis
       - echo "Running SonarQube analysis..."
-      - sonar-scanner \
-          -Dsonar.projectKey=shopnow-frontend \
-          -Dsonar.projectName=shopnow-frontend \
-          -Dsonar.projectVersion=$TAG_NAME \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=$SONAR_HOST_URL \
-          -Dsonar.login=$SONAR_TOKEN || echo "SonarQube analysis failed but continuing..."
+      - sonar-scanner -Dsonar.sources="./src/" -Dsonar.projectKey="shopnow-frontend" -Dsonar.projectName="shopnow-frontend" -Dsonar.projectVersion="${TAG_NAME}" -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_TOKEN}
 
       # Login to ECR
       - echo "Logging in to Amazon ECR..."
