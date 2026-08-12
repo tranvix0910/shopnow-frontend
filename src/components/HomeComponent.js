@@ -951,7 +951,7 @@ export default function HomeComponent() {
           {/* Hero Section */}
           <div className="hero-section">
             <div className="hero-content">
-              <h1 className="hero-title">Welcome to ShopNow</h1>
+              <h1 className="hero-title">Welcome to ShopNow — Preview Build v2</h1>
               <p className="hero-subtitle">
                 Discover premium products with exceptional quality, unbeatable prices, and a shopping experience like no other
               </p>
